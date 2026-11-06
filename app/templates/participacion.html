@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Participación comunitaria | PrioriSalud{% endblock %}
+{% block content %}
+<div class="page-heading"><div><div class="eyebrow">MÓDULO 02</div><h1>Participación comunitaria</h1><p>Una priorización legítima necesita escuchar a quienes viven el territorio.</p></div><span class="version-tag">DISEÑO PARTICIPATIVO</span></div>
+<div class="notice"><span class="notice-icon">i</span><div><b>Escenario de simulación</b><p>Los puntajes que aparecen abajo son datos ficticios para probar la interfaz. No representan una consulta real a habitantes.</p></div></div>
+<div class="content-grid">
+<section class="panel"><div class="panel-heading"><div><h2>Actores convocados</h2><p>Representación propuesta para el ejercicio.</p></div></div>
+<ul class="actor-list">
+<li><span>01</span><div><b>Gestantes, madres, padres y cuidadores</b><small>Experiencias de atención materno-infantil.</small></div></li>
+<li><span>02</span><div><b>Líderes y lideresas de las veredas</b><small>Necesidades y barreras del territorio.</small></div></li>
+<li><span>03</span><div><b>Autoridades étnicas y organizaciones diferenciales</b><small>Enfoque diferencial e inclusión.</small></div></li>
+<li><span>04</span><div><b>ESE, EPS, IPS y Secretaría de Salud</b><small>Capacidad institucional y articulación.</small></div></li>
+<li><span>05</span><div><b>Operadores de transporte y autoridades locales</b><small>Movilidad y condiciones de acceso.</small></div></li>
+</ul></section>
+<section class="panel"><div class="panel-heading"><div><h2>Reglas de deliberación</h2><p>Condiciones para una participación equitativa.</p></div></div>
+<div class="rule-item"><b>01 · Escucha activa</b><p>Dar tiempo de intervención a todos los sectores, sin imponer una respuesta.</p></div>
+<div class="rule-item"><b>02 · Lenguaje accesible</b><p>Explicar criterios y alternativas sin tecnicismos innecesarios.</p></div>
+<div class="rule-item"><b>03 · Inclusión</b><p>Facilitar participación rural, diferencial y de personas con discapacidad.</p></div>
+<div class="rule-item"><b>04 · Transparencia</b><p>Registrar método, participantes por sector y resultados agregados.</p></div>
+<div class="rule-item"><b>05 · Protección</b><p>No publicar datos personales ni ubicaciones domiciliarias identificables.</p></div>
+</section>
+</div>
+<section class="panel"><div class="panel-heading"><div><h2>Valoración comunitaria de ejemplo</h2><p>Escala demostrativa de 1 a 5. La matriz real será definida por Tatiana.</p></div></div>
+{% for r in results %}
+<div class="rank-row"><div class="rank-name"><span class="rank-index">{{ loop.index }}</span><b>{{ r.name }}</b></div><div class="bar-track"><div class="bar-fill community-fill" style="width:{{ r.score * 20 }}%"></div></div><strong class="rank-score">{{ r.score }}/5</strong></div>
+{% endfor %}
+</section>
+{% endblock %}

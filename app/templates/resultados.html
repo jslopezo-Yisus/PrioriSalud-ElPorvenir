@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Comparación de resultados | PrioriSalud{% endblock %}
+{% block content %}
+<div class="page-heading"><div><div class="eyebrow">MÓDULO 03</div><h1>Comparación de resultados</h1><p>Identifica coincidencias y diferencias entre la mirada técnica y comunitaria.</p></div><span class="version-tag">INTEGRACIÓN</span></div>
+<div class="notice"><span class="notice-icon">i</span><div><b>Comparación ilustrativa</b><p>Los resultados son simulados. La conclusión final debe construirse con las matrices validadas por Cristhian y Tatiana.</p></div></div>
+<section class="panel"><div class="panel-heading"><div><h2>Vista comparativa</h2><p>Puntajes de ejemplo en escala de 1 a 5.</p></div></div>
+<div class="table-wrap"><table><thead><tr><th>Problema</th><th>Evaluación técnica</th><th>Valoración comunitaria</th><th>Lectura inicial</th></tr></thead><tbody>
+{% for t in technical %}
+{% set c = (community | selectattr('id', 'equalto', t.id) | list | first) %}
+<tr><td><b>{{ t.name }}</b></td><td>{{ t.score }}/5</td><td>{{ c.score }}/5</td><td><span class="level-tag">{{ "Coincidencia alta" if (t.score - c.score)|abs < 0.6 else "Revisar diferencia" }}</span></td></tr>
+{% endfor %}
+</tbody></table></div></section>
+<div class="content-grid">
+<section class="panel"><h2>Preguntas para integrar los resultados</h2><ul class="plain-list"><li>¿Qué problemas aparecen en los primeros lugares de ambas matrices?</li><li>¿Qué necesidades comunitarias no quedan reflejadas en los datos disponibles?</li><li>¿Qué diferencias requieren una explicación territorial o institucional?</li><li>¿Qué decisión conjunta puede justificarse con la evidencia disponible?</li></ul></section>
+<section class="panel"><h2>Registro de acuerdos</h2><p class="muted">Espacio previsto para documentar la deliberación final del equipo.</p><div class="empty-state">Pendiente de incorporar resultados validados</div></section>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Evaluación técnica | PrioriSalud{% endblock %}
+{% block content %}
+<div class="page-heading"><div><div class="eyebrow">MÓDULO 01</div><h1>Evaluación técnica</h1><p>Comparación de alternativas mediante criterios multicriterio.</p></div><span class="version-tag">ESCALA 1 A 5</span></div>
+<div class="notice"><span class="notice-icon">i</span><div><b>Matriz demostrativa</b><p>Los pesos y puntajes son provisionales. Reemplázalos cuando Cristhian entregue la metodología aprobada y su justificación documental.</p></div></div>
+<section class="panel">
+  <div class="panel-heading"><div><h2>Criterios y ponderaciones</h2><p>La suma de ponderaciones debe ser 100%.</p></div><span class="soft-tag">Multicriterio</span></div>
+  <div class="criteria-grid">
+  {% for c in criteria %}
+    <div class="criterion-card"><div class="criterion-top"><b>{{ c.name }}</b><strong>{{ c.weight }}%</strong></div><p>{{ c.description }}</p></div>
+  {% endfor %}
+  </div>
+</section>
+<section class="panel">
+  <div class="panel-heading"><div><h2>Resultado por alternativa</h2><p>Puntaje ponderado calculado automáticamente desde los datos demostrativos.</p></div></div>
+  <div class="table-wrap"><table><thead><tr><th>Pos.</th><th>Problema</th><th>Resultado</th><th>Nivel ilustrativo</th></tr></thead><tbody>
+  {% for r in results %}<tr><td>{{ loop.index }}</td><td><b>{{ r.name }}</b></td><td><b>{{ r.score }}/5</b></td><td><span class="level-tag">{{ "Alto" if r.score >= 4 else "Medio" }}</span></td></tr>{% endfor %}
+  </tbody></table></div>
+</section>
+{% endblock %}

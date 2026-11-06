@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}PrioriSalud El Porvenir{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <a class="brand" href="{{ url_for('main.dashboard') }}">
+      <span class="brand-mark">+</span>
+      <span><strong>PrioriSalud</strong><small>EL PORVENIR</small></span>
+    </a>
+    <div class="nav-label">ESPACIO DE TRABAJO</div>
+    <nav>
+      <a class="nav-link {% if request.endpoint == 'main.dashboard' %}active{% endif %}" href="{{ url_for('main.dashboard') }}"><span>▦</span> Panel principal</a>
+      <a class="nav-link {% if request.endpoint == 'main.evaluacion_tecnica' %}active{% endif %}" href="{{ url_for('main.evaluacion_tecnica') }}"><span>◫</span> Evaluación técnica</a>
+      <a class="nav-link {% if request.endpoint == 'main.participacion' %}active{% endif %}" href="{{ url_for('main.participacion') }}"><span>◎</span> Participación comunitaria</a>
+      <a class="nav-link {% if request.endpoint == 'main.resultados' %}active{% endif %}" href="{{ url_for('main.resultados') }}"><span>⌁</span> Comparación de resultados</a>
+      <a class="nav-link {% if request.endpoint == 'main.ruta_accion' %}active{% endif %}" href="{{ url_for('main.ruta_accion') }}"><span>↗</span> Ruta de acción</a>
+      <a class="nav-link {% if request.endpoint == 'main.versiones' %}active{% endif %}" href="{{ url_for('main.versiones') }}"><span>◷</span> Versiones del prototipo</a>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="mini-status"><span class="status-dot"></span><div><b>Entorno académico</b><small>Datos simulados</small></div></div>
+      <small class="sidebar-foot">Priorización territorial en salud<br>Proyecto Eje 3 · APS II</small>
+    </div>
+  </aside>
+  <main class="main-area">
+    <header class="topbar">
+      <div><span class="eyebrow">ATENCIÓN PRIMARIA EN SALUD II</span><div class="top-title">Municipio de El Porvenir</div></div>
+      <div class="top-right"><span class="case-pill"><i></i> Caso simulado</span><div class="avatar">PS</div></div>
+    </header>
+    <section class="page-content">
+      {% block content %}{% endblock %}
+      <footer>PrioriSalud El Porvenir <span>·</span> Prototipo académico de priorización territorial</footer>
+    </section>
+  </main>
+</div>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
