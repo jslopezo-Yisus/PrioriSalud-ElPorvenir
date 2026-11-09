@@ -1,20 +1,14 @@
 {% extends "base.html" %}
 {% block title %}Evaluación técnica | PrioriSalud{% endblock %}
 {% block content %}
-<div class="page-heading"><div><div class="eyebrow">MÓDULO 01</div><h1>Evaluación técnica</h1><p>Comparación de alternativas mediante criterios multicriterio.</p></div><span class="version-tag">ESCALA 1 A 5</span></div>
-<div class="notice"><span class="notice-icon">i</span><div><b>Matriz demostrativa</b><p>Los pesos y puntajes son provisionales. Reemplázalos cuando Cristhian entregue la metodología aprobada y su justificación documental.</p></div></div>
-<section class="panel">
-  <div class="panel-heading"><div><h2>Criterios y ponderaciones</h2><p>La suma de ponderaciones debe ser 100%.</p></div><span class="soft-tag">Multicriterio</span></div>
-  <div class="criteria-grid">
-  {% for c in criteria %}
-    <div class="criterion-card"><div class="criterion-top"><b>{{ c.name }}</b><strong>{{ c.weight }}%</strong></div><p>{{ c.description }}</p></div>
-  {% endfor %}
-  </div>
-</section>
-<section class="panel">
-  <div class="panel-heading"><div><h2>Resultado por alternativa</h2><p>Puntaje ponderado calculado automáticamente desde los datos demostrativos.</p></div></div>
-  <div class="table-wrap"><table><thead><tr><th>Pos.</th><th>Problema</th><th>Resultado</th><th>Nivel ilustrativo</th></tr></thead><tbody>
-  {% for r in results %}<tr><td>{{ loop.index }}</td><td><b>{{ r.name }}</b></td><td><b>{{ r.score }}/5</b></td><td><span class="level-tag">{{ "Alto" if r.score >= 4 else "Medio" }}</span></td></tr>{% endfor %}
-  </tbody></table></div>
+<div class="page-heading"><div><div class="eyebrow">MÓDULO 01 · MATRIZ TÉCNICA</div><h1>Evaluación técnica</h1><p>Priorización multicriterio de las necesidades identificadas en El Porvenir.</p></div><span class="version-tag">ESCALA 1 A 5</span></div>
+<div class="notice"><span class="notice-icon">i</span><div><b>Matriz académica simulada</b><p>Los criterios, pesos, calificaciones y justificaciones son una propuesta hipotética para demostrar el método. No constituyen una evaluación institucional ni una decisión sanitaria real.</p></div></div>
+<section class="panel"><div class="panel-heading"><div><h2>Metodología de calificación</h2><p>Cada problema recibe una puntuación de 1 a 5 por criterio. El resultado se obtiene mediante suma ponderada.</p></div><span class="soft-tag">Suma de pesos: {{ criteria|sum(attribute='weight') }}%</span></div>
+<div class="criteria-grid">{% for c in criteria %}<article class="criterion-card"><div class="criterion-top"><b>{{ c.name }}</b><strong>{{ c.weight }}%</strong></div><p>{{ c.description }}</p><small class="method-guide">{{ c.guide }}</small></article>{% endfor %}</div>
+<div class="formula-note"><b>Fórmula:</b> resultado = Σ (calificación × ponderación) / 100. Un resultado más alto indica mayor prioridad relativa dentro de este ejercicio.</div></section>
+<section class="panel"><div class="panel-heading"><div><h2>Resultado técnico ponderado</h2><p>Orden descendente calculado automáticamente con los valores de la matriz.</p></div></div>
+<div class="table-wrap"><table><thead><tr><th>Pos.</th><th>Problema</th><th>Resultado</th><th>Lectura</th></tr></thead><tbody>{% for r in results %}<tr><td>{{ loop.index }}</td><td><b>{{ r.name }}</b></td><td><b>{{ '%.2f'|format(r.score) }}/5</b></td><td><span class="level-tag">{{ 'Prioridad relativa alta' if r.score >= 4 else ('Prioridad relativa media' if r.score >= 3 else 'Prioridad relativa baja') }}</span></td></tr>{% endfor %}</tbody></table></div></section>
+<section class="panel"><div class="panel-heading"><div><h2>Detalle de calificaciones y justificaciones</h2><p>La explicación permite rastrear por qué cada alternativa recibió su puntuación.</p></div></div>
+{% for r in results %}<div class="matrix-problem"><div class="matrix-problem-head"><h3>{{ r.name }}</h3><strong>{{ '%.2f'|format(r.score) }}/5</strong></div><div class="table-wrap"><table><thead><tr><th>Criterio</th><th>Peso</th><th>Nota</th><th>Justificación hipotética</th></tr></thead><tbody>{% for c in criteria %}<tr><td>{{ c.name }}</td><td>{{ c.weight }}%</td><td><b>{{ r.scores[loop.index0] }}/5</b></td><td>{{ r.rationales[loop.index0] }}</td></tr>{% endfor %}</tbody></table></div><p class="data-gap"><b>Información por completar:</b> {{ r.data_gap }}</p></div>{% endfor %}
 </section>
 {% endblock %}

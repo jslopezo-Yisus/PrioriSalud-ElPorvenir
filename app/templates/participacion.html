@@ -1,28 +1,12 @@
 {% extends "base.html" %}
 {% block title %}Participación comunitaria | PrioriSalud{% endblock %}
 {% block content %}
-<div class="page-heading"><div><div class="eyebrow">MÓDULO 02</div><h1>Participación comunitaria</h1><p>Una priorización legítima necesita escuchar a quienes viven el territorio.</p></div><span class="version-tag">DISEÑO PARTICIPATIVO</span></div>
-<div class="notice"><span class="notice-icon">i</span><div><b>Escenario de simulación</b><p>Los puntajes que aparecen abajo son datos ficticios para probar la interfaz. No representan una consulta real a habitantes.</p></div></div>
-<div class="content-grid">
-<section class="panel"><div class="panel-heading"><div><h2>Actores convocados</h2><p>Representación propuesta para el ejercicio.</p></div></div>
-<ul class="actor-list">
-<li><span>01</span><div><b>Gestantes, madres, padres y cuidadores</b><small>Experiencias de atención materno-infantil.</small></div></li>
-<li><span>02</span><div><b>Líderes y lideresas de las veredas</b><small>Necesidades y barreras del territorio.</small></div></li>
-<li><span>03</span><div><b>Autoridades étnicas y organizaciones diferenciales</b><small>Enfoque diferencial e inclusión.</small></div></li>
-<li><span>04</span><div><b>ESE, EPS, IPS y Secretaría de Salud</b><small>Capacidad institucional y articulación.</small></div></li>
-<li><span>05</span><div><b>Operadores de transporte y autoridades locales</b><small>Movilidad y condiciones de acceso.</small></div></li>
-</ul></section>
-<section class="panel"><div class="panel-heading"><div><h2>Reglas de deliberación</h2><p>Condiciones para una participación equitativa.</p></div></div>
-<div class="rule-item"><b>01 · Escucha activa</b><p>Dar tiempo de intervención a todos los sectores, sin imponer una respuesta.</p></div>
-<div class="rule-item"><b>02 · Lenguaje accesible</b><p>Explicar criterios y alternativas sin tecnicismos innecesarios.</p></div>
-<div class="rule-item"><b>03 · Inclusión</b><p>Facilitar participación rural, diferencial y de personas con discapacidad.</p></div>
-<div class="rule-item"><b>04 · Transparencia</b><p>Registrar método, participantes por sector y resultados agregados.</p></div>
-<div class="rule-item"><b>05 · Protección</b><p>No publicar datos personales ni ubicaciones domiciliarias identificables.</p></div>
-</section>
-</div>
-<section class="panel"><div class="panel-heading"><div><h2>Valoración comunitaria de ejemplo</h2><p>Escala demostrativa de 1 a 5. La matriz real será definida por Tatiana.</p></div></div>
-{% for r in results %}
-<div class="rank-row"><div class="rank-name"><span class="rank-index">{{ loop.index }}</span><b>{{ r.name }}</b></div><div class="bar-track"><div class="bar-fill community-fill" style="width:{{ r.score * 20 }}%"></div></div><strong class="rank-score">{{ r.score }}/5</strong></div>
-{% endfor %}
-</section>
+<div class="page-heading"><div><div class="eyebrow">MÓDULO 02 · MATRIZ PARTICIPATIVA</div><h1>Participación comunitaria</h1><p>Una priorización territorial debe incorporar las experiencias y percepciones de la comunidad.</p></div><span class="version-tag">DISEÑO PARTICIPATIVO</span></div>
+<div class="notice"><span class="notice-icon">i</span><div><b>Ejercicio participativo hipotético</b><p>Los puntajes presentados simulan el resultado agregado de una deliberación. No hubo consulta real ni participantes encuestados para generar estas cifras.</p></div></div>
+<div class="content-grid"><section class="panel"><div class="panel-heading"><div><h2>Actores que se propone convocar</h2><p>Composición sugerida para una deliberación incluyente.</p></div></div><ul class="actor-list">{% for actor in actors %}<li><span>{{ '%02d'|format(loop.index) }}</span><div><b>{{ actor.name }}</b><small>{{ actor.role }}</small></div></li>{% endfor %}</ul></section>
+<section class="panel"><div class="panel-heading"><div><h2>Reglas de deliberación</h2><p>Condiciones para recoger opiniones de manera respetuosa.</p></div></div>{% for name, description in rules %}<div class="rule-item"><b>{{ '%02d'|format(loop.index) }} · {{ name }}</b><p>{{ description }}</p></div>{% endfor %}</section></div>
+<section class="panel"><div class="panel-heading"><div><h2>Instrumento de valoración propuesto</h2><p>Escala de 1 a 5. Los criterios reflejan experiencia cotidiana y posibilidad de respuesta comunitaria.</p></div><span class="soft-tag">Suma de pesos: {{ criteria|sum(attribute='weight') }}%</span></div>
+<div class="criteria-grid">{% for c in criteria %}<article class="criterion-card"><div class="criterion-top"><b>{{ c.name }}</b><strong>{{ c.weight }}%</strong></div><p>{{ c.description }}</p></article>{% endfor %}</div><div class="formula-note"><b>Pregunta orientadora:</b> pensando en las necesidades del territorio, ¿qué tan importante considera cada problema según estos criterios? 1 representa valoración baja y 5 valoración muy alta.</div></section>
+<section class="panel"><div class="panel-heading"><div><h2>Resultado comunitario simulado</h2><p>Puntaje ponderado agregado de ejemplo por alternativa.</p></div></div><div class="table-wrap"><table><thead><tr><th>Pos.</th><th>Problema</th><th>Resultado</th><th>Lectura</th></tr></thead><tbody>{% for r in results %}<tr><td>{{ loop.index }}</td><td><b>{{ r.name }}</b></td><td><b>{{ '%.2f'|format(r.score) }}/5</b></td><td><span class="level-tag">{{ 'Valoración relativa alta' if r.score >= 4 else 'Valoración relativa media' }}</span></td></tr>{% endfor %}</tbody></table></div></section>
+<section class="panel"><div class="panel-heading"><div><h2>Detalle de la matriz participativa</h2><p>Justificaciones narrativas construidas para el escenario académico.</p></div></div>{% for r in results %}<div class="matrix-problem"><div class="matrix-problem-head"><h3>{{ r.name }}</h3><strong>{{ '%.2f'|format(r.score) }}/5</strong></div><div class="table-wrap"><table><thead><tr><th>Criterio</th><th>Peso</th><th>Nota simulada</th><th>Razón ilustrativa</th></tr></thead><tbody>{% for c in criteria %}<tr><td>{{ c.name }}</td><td>{{ c.weight }}%</td><td><b>{{ r.scores[loop.index0] }}/5</b></td><td>{{ r.rationales[loop.index0] }}</td></tr>{% endfor %}</tbody></table></div></div>{% endfor %}</section>
 {% endblock %}

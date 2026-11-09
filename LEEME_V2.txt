@@ -1,0 +1,28 @@
+PRIORISALUD EL PORVENIR - AVANCE V2
+
+CONTENIDO ACTUALIZADO
+- app/data.py: contexto del caso, problemas, criterios, puntuaciones y funciones de cálculo de las matrices técnica, comunitaria e integrada.
+- app/routes.py: conexión de los datos con los módulos de la aplicación.
+- app/templates/evaluacion_tecnica.html: matriz técnica ponderada con calificaciones y justificaciones.
+- app/templates/participacion.html: matriz participativa simulada, actores, reglas y criterios ponderados.
+- app/templates/resultados.html: comparación técnica-comunitaria e integración ponderada.
+- app/templates/dashboard.html: panel actualizado para mostrar la síntesis integrada.
+- app/templates/versiones.html: estado de trabajo actualizado a desarrollo V2.
+- app/static/css/style.css: estilos para matrices y resultados integrados.
+
+INSTALACIÓN LOCAL
+1. Haz una copia de seguridad de tu carpeta actual.
+2. Extrae el ZIP.
+3. Reemplaza la carpeta app por la incluida en este paquete (o copia sus archivos conservando las rutas).
+4. Activa tu entorno virtual.
+5. Ejecuta: pip install -r requirements.txt (si las dependencias no están instaladas).
+6. Ejecuta: python run.py
+7. Revisa /, /evaluacion-tecnica, /participacion y /resultados.
+
+IMPORTANTE SOBRE EL MÉTODO
+Todos los puntajes, criterios, pesos y justificaciones añadidos para las matrices son hipotéticos y demostrativos. No proceden de una consulta comunitaria ni de una validación institucional. La matriz técnica usa pesos 25/25/20/15/15. La matriz comunitaria usa 30/30/25/15. La integración usa 60% técnica y 40% comunitaria. Estas ponderaciones son decisiones de diseño del ejercicio, no estándares oficiales.
+
+La prioridad integrada que resulta más alta es Atención materno-infantil rural (4.57/5), seguida de Barreras geográficas y económicas de acceso (4.28/5). La matriz comunitaria ubica primero las barreras de acceso, mientras que la técnica ubica primero la atención materno-infantil. Esta diferencia es útil para la deliberación y se muestra en el módulo de comparación.
+
+NO PUBLICAR COMO V2 FINAL TODAVÍA
+Este paquete es un avance funcional de V2. Faltan completar y probar la ruta de acción, incorporar seguimiento de indicadores, revisar el panel general y ejecutar pruebas funcionales de todos los módulos en el entorno local. No se ha desplegado ni publicado esta actualización.

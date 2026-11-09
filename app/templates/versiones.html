@@ -1,14 +1,110 @@
 {% extends "base.html" %}
 {% block title %}Versiones | PrioriSalud{% endblock %}
 {% block content %}
-<div class="page-heading"><div><div class="eyebrow">MEJORA CONTINUA</div><h1>Versiones del prototipo</h1><p>Registro de pruebas, observaciones y ajustes de PrioriSalud.</p></div><span class="version-tag">CONTROL DE CAMBIOS</span></div>
-<div class="version-card current"><div class="version-head"><div><span class="version-tag">VERSIÓN ACTUAL</span><h2>V1 · Estructura funcional inicial</h2></div><span class="status-pill">En construcción</span></div><p>Incluye navegación principal, módulos de evaluación técnica y comunitaria, comparación, ruta de acción y datos demostrativos.</p><div class="version-meta">Estado: lista para pruebas internas iniciales.</div></div>
-<div class="version-card"><div class="version-head"><div><span class="version-tag">SIGUIENTE ITERACIÓN</span><h2>V2 · Ajustes posteriores al piloto</h2></div><span class="status-pill pending">Pendiente</span></div><p>Se completará después de probar el prototipo con usuarios, registrar dificultades y aplicar mejoras de comprensión, navegación y consistencia metodológica.</p><div class="version-meta">Registrar: observación · problema detectado · mejora aplicada · evidencia.</div></div>
-<section class="panel"><h2>Bitácora de pruebas</h2><p class="muted">Usa este espacio como guía para documentar el piloto.</p>
-<div class="table-wrap"><table><thead><tr><th>Elemento evaluado</th><th>Qué observar</th><th>Resultado del piloto</th></tr></thead><tbody>
-<tr><td>Comprensión</td><td>¿La persona entiende el propósito y los datos?</td><td>Pendiente</td></tr>
-<tr><td>Navegación</td><td>¿Encuentra los módulos sin ayuda?</td><td>Pendiente</td></tr>
-<tr><td>Interpretación</td><td>¿Comprende escalas, puntajes y resultados?</td><td>Pendiente</td></tr>
-<tr><td>Accesibilidad</td><td>¿El contenido es legible y claro?</td><td>Pendiente</td></tr>
-</tbody></table></div></section>
+<div class="page-heading">
+    <div>
+        <div class="eyebrow">MEJORA CONTINUA</div>
+        <h1>Versiones del prototipo</h1>
+        <p>Historial de desarrollo, control de cambios y seguimiento de las pruebas de PrioriSalud.</p>
+    </div>
+    <span class="version-tag">CONTROL DE CAMBIOS</span>
+</div>
+
+<section class="version-card current">
+    <div class="version-head">
+        <div>
+            <span class="version-tag">VERSIÓN DE TRABAJO</span>
+            <h2>V2 · Desarrollo metodológico y funcional</h2>
+        </div>
+        <span class="status-pill">Implementada</span>
+    </div>
+    <p>La nueva etapa amplía las matrices técnica y participativa, integra sus resultados y fortalece la trazabilidad de la priorización territorial.</p>
+    <div class="version-meta">
+        <strong>Estado del proyecto:</strong> módulos de matrices e integración desarrollados con datos hipotéticos.
+        La validación con fuentes y participantes reales sigue pendiente.
+    </div>
+</section>
+
+<section class="panel">
+    <h2>Historial de versiones</h2>
+    <p class="muted">Se registran únicamente cambios implementados o estados expresamente pendientes. Las fechas se incorporarán cuando el equipo consolide su bitácora de trabajo.</p>
+    {% for version in versions|reverse %}
+    <article class="version-card">
+        <div class="version-head">
+            <div>
+                <span class="version-tag">{{ version.version }}</span>
+                <h2>{{ version.name }}</h2>
+            </div>
+            <span class="status-pill">{{ version.status }}</span>
+        </div>
+        <p>{{ version.summary }}</p>
+        <ul>
+            {% for change in version.changes %}
+            <li>{{ change }}</li>
+            {% endfor %}
+        </ul>
+        <div class="version-meta">{{ version.note }}</div>
+    </article>
+    {% endfor %}
+</section>
+
+<section class="panel">
+    <h2>Bitácora para el piloto</h2>
+    <p class="muted">Esta lista orienta la observación. Los resultados permanecen sin diligenciar hasta realizar las pruebas.</p>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr><th>Aspecto</th><th>Qué observar</th><th>Evidencia que se debe registrar</th><th>Estado</th></tr>
+            </thead>
+            <tbody>
+                {% for check in pilot_checks %}
+                <tr>
+                    <td>{{ check.area }}</td>
+                    <td>{{ check.question }}</td>
+                    <td>{{ check.evidence }}</td>
+                    <td><span class="status-pill pending">Pendiente</span></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="panel">
+    <h2>Cómo registrar un hallazgo</h2>
+    <p class="muted">Cada ajuste posterior al piloto debe poder rastrearse desde la observación hasta la decisión tomada.</p>
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th>Campo</th><th>Qué debe documentarse</th></tr></thead>
+            <tbody>
+                <tr><td>Observación</td><td>Qué ocurrió durante la prueba, descrito de forma concreta.</td></tr>
+                <tr><td>Problema identificado</td><td>Qué dificultad, error o necesidad evidencia la observación.</td></tr>
+                <tr><td>Decisión del equipo</td><td>Si se acepta el hallazgo, se aplaza o no requiere cambio, y por qué.</td></tr>
+                <tr><td>Mejora aplicada</td><td>Qué archivo, módulo, texto, criterio o interacción se modificó.</td></tr>
+                <tr><td>Verificación</td><td>Cómo se comprobó el ajuste y cuál fue el resultado observado.</td></tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="version-card">
+    <div class="version-head">
+        <div>
+            <span class="version-tag">SIGUIENTE ITERACIÓN</span>
+            <h2>V2 · Validación y mejoras posteriores al piloto</h2>
+        </div>
+        <span class="status-pill pending">Pendiente</span>
+    </div>
+    <p>La V2 se definirá cuando se realicen las pruebas, se revisen los resultados con el equipo y se implementen los cambios aprobados.</p>
+    <ul>
+        {% for item in next_iteration %}
+        <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+</section>
+
+<section class="panel">
+    <h2>Nota de integridad del registro</h2>
+    <p>Las cifras y puntuaciones del caso El Porvenir son simuladas o demostrativas según corresponda. La revisión visual de la interfaz no constituye validación con la comunidad ni aprobación definitiva de las matrices. La bitácora debe actualizarse con evidencias reales del proceso del equipo.</p>
+</section>
 {% endblock %}

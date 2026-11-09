@@ -1,0 +1,26 @@
+PRIORISALUD EL PORVENIR - V2 DEMOSTRATIVA
+
+Esta entrega consolida el prototipo académico V2.
+
+INCLUYE
+- Panel principal con resumen de contexto y resultado integrado.
+- Matriz técnica ponderada con criterios, calificaciones y justificaciones simuladas.
+- Matriz participativa hipotética con actores, criterios y reglas de deliberación.
+- Matriz integrada con ponderación 60% técnica y 40% comunitaria.
+- Ruta de acción territorial de 12 meses, organizada en cuatro fases.
+- Indicadores con definiciones, metas de proceso propuestas, líneas base pendientes y fuentes.
+- Recursos, riesgos, controles y mecanismo de seguimiento.
+- Historial de versiones actualizado a V2.0.
+
+INSTALACIÓN LOCAL
+1. Realiza una copia de seguridad de tu proyecto actual.
+2. Extrae este ZIP.
+3. Reemplaza la carpeta app de tu proyecto con la carpeta app incluida.
+4. Conserva tu entorno virtual (.venv) y requirements.txt.
+5. Activa tu entorno e inicia con: python run.py
+6. Revisa: /, /evaluacion-tecnica, /participacion, /resultados, /ruta-accion y /versiones.
+
+IMPORTANTE SOBRE LA VALIDEZ
+Este es un prototipo académico de demostración. Las puntuaciones técnicas, las valoraciones comunitarias, la ponderación de integración y las metas de proceso son propuestas hipotéticas. No representan una consulta comunitaria, una medición real ni compromisos institucionales. Las líneas base de indicadores deben levantarse y validarse. No se deben ingresar datos personales de pacientes.
+
+La V2 queda implementada para demostración académica; la validación externa, el piloto con participantes y la comprobación de datos reales permanecen pendientes.

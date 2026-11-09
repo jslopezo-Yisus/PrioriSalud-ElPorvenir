@@ -3,9 +3,9 @@
 {% block content %}
 <div class="page-heading">
   <div><div class="eyebrow">VISTA GENERAL</div><h1>Panel de priorización</h1><p>Una visión compartida de las necesidades de salud del territorio.</p></div>
-  <span class="version-tag">PROTOTIPO · V1</span>
+  <span class="version-tag">V2 · DEMOSTRACIÓN ACADÉMICA</span>
 </div>
-<div class="notice"><span class="notice-icon">i</span><div><b>Información de demostración</b><p>Las puntuaciones y valoraciones comunitarias visibles son simuladas. Deben reemplazarse o validarse con los aportes del equipo.</p></div></div>
+<div class="notice"><span class="notice-icon">i</span><div><b>Información de demostración</b><p>Las puntuaciones y valoraciones comunitarias son simulaciones académicas para demostrar el método. No representan una consulta ni una decisión real.</p></div></div>
 <div class="stats-grid">
   <article class="stat-card"><div class="stat-top"><span>Habitantes</span><span class="stat-icon blue">⌂</span></div><strong>48.600</strong><small>Población total del municipio</small></article>
   <article class="stat-card"><div class="stat-top"><span>Veredas rurales</span><span class="stat-icon teal">⌖</span></div><strong>18</strong><small>Territorio disperso</small></article>
@@ -31,10 +31,11 @@
   </section>
 </div>
 <section class="panel ranking-panel">
-  <div class="panel-heading"><div><h2>Resultado técnico preliminar</h2><p>Ejemplo de cálculo con escala de 1 a 5 y ponderaciones demostrativas.</p></div><a class="text-link" href="{{ url_for('main.evaluacion_tecnica') }}">Ver evaluación completa →</a></div>
-  {% for item in technical %}
+  <div class="panel-heading"><div><h2>Resultado integrado demostrativo</h2><p>Síntesis de las matrices técnica y comunitaria del escenario hipotético.</p></div><a class="text-link" href="{{ url_for('main.resultados') }}">Ver integración completa →</a></div>
+  {% for item in integrated %}
   <div class="rank-row"><div class="rank-name"><span class="rank-index">{{ loop.index }}</span><b>{{ item.name }}</b></div><div class="bar-track"><div class="bar-fill" style="width:{{ item.score * 20 }}%"></div></div><strong class="rank-score">{{ item.score }}/5</strong></div>
   {% endfor %}
-  <div class="small-note">No corresponde a una priorización definitiva. Las calificaciones deben ser acordadas y justificadas por el equipo.</div>
+  <div class="small-note">Resultado hipotético sujeto a validación metodológica y territorial.</div>
+  <a class="text-link" href="{{ url_for('main.ruta_accion') }}">Consultar ruta de acción propuesta →</a>
 </section>
 {% endblock %}

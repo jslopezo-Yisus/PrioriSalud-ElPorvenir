@@ -1,19 +1,51 @@
 {% extends "base.html" %}
 {% block title %}Ruta de acción | PrioriSalud{% endblock %}
 {% block content %}
-<div class="page-heading"><div><div class="eyebrow">MÓDULO 04</div><h1>Ruta inicial de acción territorial</h1><p>Del problema priorizado a una respuesta organizada en el territorio.</p></div><span class="version-tag">HORIZONTE: 12 MESES</span></div>
-<div class="notice"><span class="notice-icon">i</span><div><b>Ruta preliminar sujeta a validación</b><p>Se presenta como punto de partida a partir de la prioridad materno-infantil definida en fases anteriores.</p></div></div>
+<div class="page-heading"><div><div class="eyebrow">MÓDULO 04 · PLANIFICACIÓN TERRITORIAL</div><h1>Ruta de acción territorial</h1><p>Del resultado de priorización a una respuesta organizada, medible y sujeta a seguimiento.</p></div><span class="version-tag">V2 · HORIZONTE 12 MESES</span></div>
+<div class="notice"><span class="notice-icon">i</span><div><b>Plan académico demostrativo</b><p>La ruta se construye a partir de la prioridad hipotética obtenida en las matrices. Las actividades, responsables y metas son propuestas de planeación, no compromisos institucionales ni resultados ejecutados.</p></div></div>
+<section class="panel">
+  <div class="panel-heading"><div><h2>Problema priorizado</h2><p>Alternativa con mayor resultado integrado en el escenario de demostración.</p></div><span class="soft-tag">Prioridad hipotética</span></div>
+  <div class="context-highlight"><strong>{{ '%.2f'|format(priority.score) }}/5</strong><span><b>{{ priority.name }}</b><br>Resultado integrado · {{ priority.agreement }}</span></div>
+  <p>{{ priority.description }}</p>
+  <div class="small-note">La selección debe revisarse si cambian los datos, criterios, ponderaciones o acuerdos de deliberación.</div>
+</section>
+<section class="panel"><div class="panel-heading"><div><h2>Objetivo general</h2><p>Propósito orientador de la intervención propuesta.</p></div></div>
+<p class="interpretation">Mejorar la oportunidad y continuidad de la atención preventiva materno-infantil en las zonas rurales dispersas de El Porvenir, mediante identificación de barreras, organización de servicios extramurales, seguimiento de necesidades y articulación institucional y comunitaria.</p>
+<div class="criteria-grid">
+  <article class="criterion-card"><div class="criterion-top"><b>Enfoque poblacional</b></div><p>Gestantes, niñas y niños menores de cinco años, madres, padres y cuidadores.</p></article>
+  <article class="criterion-card"><div class="criterion-top"><b>Enfoque territorial</b></div><p>Veredas rurales, con atención a tiempos de desplazamiento y barreras diferenciales.</p></article>
+  <article class="criterion-card"><div class="criterion-top"><b>Enfoque operativo</b></div><p>Promoción, prevención, búsqueda activa, atención extramural y continuidad del cuidado.</p></article>
+</div></section>
+<section class="panel"><div class="panel-heading"><div><h2>Fases de implementación</h2><p>Secuencia propuesta para un horizonte de doce meses.</p></div><span class="soft-tag">4 fases</span></div>
 <div class="timeline">
-<div class="timeline-item"><span class="timeline-dot">01</span><div class="panel"><span class="eyebrow">MESES 1 Y 2</span><h2>Alistamiento y validación territorial</h2><p>Actualizar y depurar registros de gestantes y menores de cinco años; verificar distribución por vereda, oferta institucional y barreras de acceso.</p><div class="meta-line"><b>Responsables propuestos:</b> Secretaría de Salud, ESE, EPS/IPS y líderes comunitarios.</div></div></div>
-<div class="timeline-item"><span class="timeline-dot">02</span><div class="panel"><span class="eyebrow">MESES 3 A 5</span><h2>Búsqueda activa y atención extramural</h2><p>Organizar jornadas rurales integradas para control prenatal, vacunación y orientación familiar, priorizando veredas con mayores tiempos de desplazamiento.</p><div class="meta-line"><b>Recursos:</b> talento humano, biológicos, cadena de frío, transporte e insumos.</div></div></div>
-<div class="timeline-item"><span class="timeline-dot">03</span><div class="panel"><span class="eyebrow">MESES 6 A 9</span><h2>Seguimiento y continuidad del cuidado</h2><p>Hacer seguimiento a esquemas pendientes, controles prenatales y remisiones; coordinar apoyos para superar barreras de transporte.</p><div class="meta-line"><b>Riesgo:</b> discontinuidad de jornadas por clima, transporte o disponibilidad de personal.</div></div></div>
-<div class="timeline-item"><span class="timeline-dot">04</span><div class="panel"><span class="eyebrow">MESES 10 A 12</span><h2>Evaluación y ajuste</h2><p>Revisar cobertura, oportunidad, continuidad y diferencias entre veredas; acordar ajustes con comunidad e instituciones.</p><div class="meta-line"><b>Producto:</b> balance territorial y plan de mejora.</div></div></div>
+{% for phase in phases %}
+  <div class="timeline-item"><span class="timeline-dot">{{ phase.phase }}</span><div class="panel phase-panel">
+    <span class="eyebrow">{{ phase.period }}</span><h2>{{ phase.title }}</h2><p><b>Objetivo:</b> {{ phase.objective }}</p>
+    <h3>Actividades principales</h3><ul>{% for activity in phase.activities %}<li>{{ activity }}</li>{% endfor %}</ul>
+    <p class="meta-line"><b>Responsables propuestos:</b> {{ phase.responsibles }}</p>
+    <p class="meta-line"><b>Producto esperado:</b> {{ phase.deliverable }}</p>
+    <p class="data-gap"><b>Riesgo operativo:</b> {{ phase.risks }}</p>
+  </div></div>
+{% endfor %}
+</div></section>
+<section class="panel"><div class="panel-heading"><div><h2>Indicadores de seguimiento</h2><p>Las metas son propuestas de proceso. Las líneas base deben levantarse y validarse antes de medir avances.</p></div></div>
+<div class="table-wrap"><table><thead><tr><th>Indicador</th><th>Definición operacional</th><th>Meta propuesta</th><th>Línea base</th><th>Frecuencia</th><th>Fuente</th></tr></thead><tbody>
+{% for item in indicators %}<tr><td><b>{{ item.name }}</b></td><td>{{ item.definition }}</td><td>{{ item.target }}</td><td>{{ item.baseline }}</td><td>{{ item.frequency }}</td><td>{{ item.source }}</td></tr>{% endfor %}
+</tbody></table></div>
+<div class="small-note">No se fija una meta de aumento de cobertura prenatal o vacunación sin conocer primero el denominador, la línea base y la capacidad real de prestación.</div>
+</section>
+<section class="panel"><div class="panel-heading"><div><h2>Recursos necesarios</h2><p>Áreas que deben verificarse durante el alistamiento.</p></div></div>
+<div class="criteria-grid">{% for item in resources %}<article class="criterion-card"><div class="criterion-top"><b>{{ item.area }}</b></div><p>{{ item.detail }}</p></article>{% endfor %}</div>
+</section>
+<section class="panel"><div class="panel-heading"><div><h2>Riesgos y medidas de control</h2><p>Acciones preventivas para sostener la operación.</p></div></div>
+<div class="table-wrap"><table><thead><tr><th>Riesgo identificado</th><th>Medida de control propuesta</th></tr></thead><tbody>{% for item in risks %}<tr><td><b>{{ item.risk }}</b></td><td>{{ item.control }}</td></tr>{% endfor %}</tbody></table></div>
+</section>
+<section class="panel"><div class="panel-heading"><div><h2>Mecanismo de seguimiento y evaluación</h2><p>Ciclo de revisión para mantener trazabilidad de las decisiones.</p></div></div>
+<div class="criteria-grid">
+  <article class="criterion-card"><div class="criterion-top"><b>Seguimiento mensual</b></div><p>Revisar jornadas programadas y realizadas, actividades de búsqueda activa, remisiones y barreras reportadas.</p></article>
+  <article class="criterion-card"><div class="criterion-top"><b>Revisión trimestral</b></div><p>Analizar indicadores disponibles, diferencias territoriales, continuidad del cuidado y riesgos emergentes.</p></article>
+  <article class="criterion-card"><div class="criterion-top"><b>Evaluación al mes 12</b></div><p>Comparar resultados con línea base validada, documentar limitaciones y acordar ajustes del siguiente ciclo.</p></article>
 </div>
-<section class="panel"><div class="panel-heading"><div><h2>Indicadores preliminares</h2><p>Definiciones y líneas base pendientes de validación.</p></div></div>
-<div class="table-wrap"><table><thead><tr><th>Indicador</th><th>Definición inicial</th><th>Dato pendiente</th></tr></thead><tbody>
-<tr><td>Inicio temprano de control prenatal</td><td>Gestantes con primer control en primer trimestre / gestantes atendidas.</td><td>Línea base y denominador territorial.</td></tr>
-<tr><td>Esquema de vacunación completo</td><td>Menores de cinco años con esquema completo según edad / población objetivo.</td><td>Desagregación por edad, biológico y vereda.</td></tr>
-<tr><td>Continuidad de atención extramural</td><td>Jornadas realizadas frente a jornadas programadas.</td><td>Programación y registro de ejecución.</td></tr>
-<tr><td>Brechas entre veredas</td><td>Diferencia de cobertura u oportunidad entre veredas.</td><td>Datos comparables por vereda.</td></tr>
-</tbody></table></div></section>
+<div class="formula-note"><b>Regla de decisión:</b> cuando un indicador no tenga datos suficientes o comparables, se reportará como no disponible y se definirá una acción para mejorar su medición; no se estimará un resultado sin sustento.</div>
+</section>
 {% endblock %}
